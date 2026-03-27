@@ -1,0 +1,28 @@
+DB
+    user:
+    uid,uname,password
+    uid key
+
+    user_func:
+    uid,func_name,input_type,output_type
+    (uid,func_name)key
+
+    reliance:
+    uid,func_name,attr
+
+private_area
+|--uid
+|-----func
+
+
+
+
+
+
+UserStruct:
+uid:str
+
+_circular_check(self)
+save_func(func_dict:Dict)->UserStructMsg 成功，描述
+test_func(func_name)->UserStructMsg  单次调用，不会递归
+run_func(func_name,param) 多次调用，存在递归

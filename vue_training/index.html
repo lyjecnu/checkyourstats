@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Vue 3 计数器示例</title>
+  <!-- 引入 Vue 3 的全局构建版本 -->
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+  <!-- 
+    这是挂载点 (Mounting Point)。
+    Vue 会接管这个 div 里面的内容，并根据我们定义的逻辑进行渲染。
+  -->
+  <div id="app">
+    <!-- 
+      {{ count }} 是插值表达式，它会显示 data 中 count 变量的值。
+      @click 是 v-on:click 的简写，用于监听点击事件。
+    -->
+    <h1>当前数字是: {{ count }}</h1>
+    <button @click="increment">+1</button>
+    <button @click="decrement">-1</button>
+  </div>
+
+  <script>
+    const { createApp, ref } = Vue;
+
+    createApp({
+      // setup 是 Composition API 的入口函数
+      setup() {
+        // 使用 ref 创建一个响应式的数据
+        // ref 用来定义基本数据类型（数字、字符串等）
+        const count = ref(0);
+
+        // 定义方法
+        const increment = () => {
+          count.value++; // 注意：在 JS 逻辑中修改 ref，需要 .value
+        };
+
+        const decrement = () => {
+          count.value--;
+        };
+
+        // 暴露给模板使用
+        // 模板中可以直接使用这些变量和方法，无需 .value
+        return {
+          count,
+          increment,
+          decrement
+        };
+      }
+    }).mount('#app'); // 挂载到 id 为 app 的 DOM 元素上
+  </script>
+</body>
+</html>
